@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>When's Your Train?</title>
+	<!-- Latest compiled and minified CSS -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    	<link rel="stylesheet" href="assets/css/style.css">
+    <!-- Firebase Link -->
+    	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+
+</head>
+<body>
+
+<div class="jumbotron">
+    <div class="jumboimage"> </div>
+	<h1 class="text-center">
+		HOW FAR AWAY IS YOUR TRAIN?
+	</h1>
+    <h3 class="text-center">
+        (AND WHERE IS EVERYONE ELSE GOING?)
+    </h3>
+</div>
+	
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Train Information</h3>
+                </div>
+
+                <div class="table-responsive" id="newData">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Origin
+                                <span class="glyphicon glyphicon-globe" aria-hidden="true" id="originSpot"></span>
+                            </th>
+                            <th>Destination
+                                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                            </th>
+                            <th>First Train Time
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </th>
+                            <th>Frequency (mins)
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </th>
+                            <th>Next Arrival
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </th>
+                            <th>Minutes Away
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                            </th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+	
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Enter Your Train Information</div>
+                <form>
+                    <div class="form-group">
+                        <label for="startingLoc">Origin</label>
+                        <input type="text" class="form-control" id="originTrain" placeholder="Origin">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endingLoc">Destination</label>
+                        <input type="text" class="form-control" id="finalDest" placeholder="Destination">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstTrip">First Train Time (00:00)</label>
+                        <input type="text" class="form-control" id="firstTrain" placeholder="02:30">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="howOften">Frequency (Minutes)</label>
+                        <input type="text" class="form-control" id="frequency" placeholder="How often does this train run?">
+                    </div>
+
+                    <button type="submit" class="btn btn-default" id="subButton">Submit</button>
+                </form>
+            </div>
+     </div>
+
+</div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="assets/javascript/trains.js"></script>	
+</body>
+</html>

@@ -1,0 +1,36 @@
+.jumbotron {
+    margin-bottom: 10px;
+    background-image: url(https://49.media.tumblr.com/4dae893159e07507ae10ce134b2cc32a/tumblr_npeju70WEa1rvn6njo1_500.gif);
+    background-position: 10% 50%;
+    background-size: cover;
+   	height: 325px;
+   	background-repeat: no-repeat;
+    color: white;
+    text-shadow: gray 0.3em 0.3em 0.3em;
+		}
+
+
+.table-responsive{
+            
+            margin-left: 25px;
+        }
+ .form-group{
+
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top:10px;
+        }
+#subButton{
+            margin: 10px;
+            margin-left: 30px;
+            background-color: #3d6862;
+            color: white ;
+        }
+
+.panel-primary>.panel-heading{
+        background-color: #3d6862;
+    }
+
+.panel-danger>.panel-heading{
+        border-color: #337ab7;
+}
