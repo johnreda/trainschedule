@@ -66,22 +66,22 @@
                 <form>
                     <div class="form-group">
                         <label for="startingLoc">Origin</label>
-                        <input type="text" class="form-control" id="originTrain" placeholder="Origin">
+                        <input type="text" class="form-control" id="originTrainInput" placeholder="Origin">
                     </div>
 
                     <div class="form-group">
                         <label for="endingLoc">Destination</label>
-                        <input type="text" class="form-control" id="finalDest" placeholder="Destination">
+                        <input type="text" class="form-control" id="finalDestInput" placeholder="Destination">
                     </div>
 
                     <div class="form-group">
-                        <label for="firstTrip">First Train Time (00:00)</label>
-                        <input type="text" class="form-control" id="firstTrain" placeholder="02:30">
+                        <label for="firstTrip">First Train Time (00:00 AM/PM)</label>
+                        <input type="time" class="form-control" id="firstTrainInput" placeholder="02:30">
                     </div>
 
                     <div class="form-group">
                         <label for="howOften">Frequency (Minutes)</label>
-                        <input type="text" class="form-control" id="frequency" placeholder="How often does this train run?">
+                        <input type="number" class="form-control" id="frequencyInput" placeholder="How often does this train run?">
                     </div>
 
                     <button type="submit" class="btn btn-default" id="subButton">Submit</button>
