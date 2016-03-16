@@ -16,11 +16,26 @@ Plan:
 
 */
 
+	var fireBase = new Firebase("https://trainschedule.firebaseIO.com");
+
+
+	fireBase.on('child_added', function(childSnapshot, prevChildKey){
+	// Gives us the entire object for each child added to Firebase
+	console.log(childSnapshot.val());
+	// Appending the variables to HTML
+	$('.table').append("<tr>"+
+					   "<td>"+childSnapshot.val().fbOrigin+"</td>"+
+					   "<td>"+childSnapshot.val().fbDestination+"</td>"+
+					   "<td>"+childSnapshot.val().fbFirstTrain+"</td>"+
+					   "<td>"+childSnapshot.val().fbFrequency+"</td>"+
+					   "</tr>");
+
+	});
+
 //FUNCTION FOR FORM SUBMISSION
 $("#subButton").on("click", function() {
 
 	//LINK TO FIREBASE
-	var fireBase = new Firebase("https://trainschedule.firebaseIO.com");
 
 
 		
@@ -46,9 +61,8 @@ $("#subButton").on("click", function() {
 	//Set Firebase Data:
 
 		//ADDS EVERY NEW TRAIN TO THE FIREBASE
-		var newTrainFB = new Firebase(fireBase + origin);
 
-			newTrainFB.set({
+			fireBase.push({
 				fbOrigin : origin,
 				fbDestination : destination,
 				fbFirstTrain : firstTrain,
@@ -81,22 +95,6 @@ $("#subButton").on("click", function() {
 
 
 //DYNAMICALLY UPDATE TABLE ====================================
-
-	fireBase.on('child_added', function(childSnapshot, prevChildKey){
-	// Gives us the entire object for each child added to Firebase
-	console.log(childSnapshot.val());
-	// Appending the variables to HTML
-	$('.table').append("<tr>"+
-					   "<td>"+childSnapshot.val().fbOrigin+"</td>"+
-					   "<td>"+childSnapshot.val().fbDestination+"</td>"+
-					   "<td>"+childSnapshot.val().fbFirstTrain+"</td>"+
-					   "<td>"+childSnapshot.val().fbFrequency+"</td>"+
-					   "<td>"+childSnapshot.val().minutesUntilTrain+"</td>"+
-					   "</tr>");
-
-	});
-
-
 
 		return false;
 
