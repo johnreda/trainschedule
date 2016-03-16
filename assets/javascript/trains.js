@@ -60,7 +60,7 @@ $("#subButton").on("click", function() {
 
 
 	//CONVERTS FIRST TIME TO MAKE SURE THAT FIRST TIME COMES BEFORE CURRENT TIME
-	var firstTimeConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
+	var firstTimeConverted = moment(currentTime, "hh:mm").subtract(1, "years");
 		console.log ("Now -1 year: " + moment(firstTimeConverted).format("hh:mm"))
 
 	//DIFFERENCE BETWEEN TIMES
