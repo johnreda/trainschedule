@@ -80,6 +80,24 @@ $("#subButton").on("click", function() {
 		console.log ("ARRIVAL: " + nextTrainFinal);
 
 
+//DYNAMICALLY UPDATE TABLE ====================================
+
+	fireBase.on('child_added', function(childSnapshot, prevChildKey){
+	// Gives us the entire object for each child added to Firebase
+	console.log(childSnapshot.val());
+	// Appending the variables to HTML
+	$('.table').append("<tr>"+
+					   "<td>"+childSnapshot.val().fbOrigin+"</td>"+
+					   "<td>"+childSnapshot.val().fbDestination+"</td>"+
+					   "<td>"+childSnapshot.val().fbFirstTrain+"</td>"+
+					   "<td>"+childSnapshot.val().fbFrequency+"</td>"+
+					   "<td>"+childSnapshot.val().minutesUntilTrain+"</td>"+
+					   "</tr>");
+
+	});
+
+
+
 		return false;
 
 
