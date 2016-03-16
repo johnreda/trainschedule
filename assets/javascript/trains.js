@@ -73,7 +73,7 @@ $("#subButton").on("click", function() {
 
 	//HOW MANY MINUTES UNTIL THE NEXT TRAIN
 	var minutesUntil = frequency - timeApart;
-		console.log ("Next Train:") + minutesUntil;
+		console.log ("Minutes until next train:") + minutesUntil;
 
 	//WHAT TIME IS THE NEXT TRAIN:
 	var nextTrainFinal = moment().add(minutesUntil, "hh:mm").format("<hh:mm></hh:mm>");
