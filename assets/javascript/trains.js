@@ -15,75 +15,91 @@ Plan:
 		- make sure it's done in a way so that it adds new input each time rather than updates what's currently there.
 
 */
-		//LINK TO FIREBASE
-	var fireBase = new Firebase("https://trainschedule.firebaseIO.com");
+
+	var fireBase = new Firebase("https://train2.firebaseIO.com");
 
 
 	fireBase.on('child_added', function(childSnapshot, prevChildKey){
 	// Gives us the entire object for each child added to Firebase
-	console.log(childSnapshot.val());
 
-	//SETTING ALL THE VARIABLES TO USER INPUT
-	var origin = $("#originTrainInput").val();
-		console.log ("Origin: " + origin);
-	var destination = $("#finalDestInput").val();
-		console.log ("Destination: " + destination);
-	var firstTrain = moment($("#firstTrainInput").val().trim(), "HH:mm").subtract(1,"years").format("HH:mm")
-		console.log ("First Train: " + firstTrain);
-	var frequency = moment($("#frequencyInput").val().trim(), "mm").format("mm");
-		console.log ("Frequency in minutes: " + frequency);
-	var currentTime = moment();
-		console.log ("Current Time: " + moment(currentTime).format("hh:mm"));
+
+	// ==============
 
 	//CONVERTS FIRST TIME TO MAKE SURE THAT FIRST TIME COMES BEFORE CURRENT TIME
+	//var firstTimeConverted = moment(firstTrain).format("hh:mm")
+		//console.log ("converted first train: " + firstTrain);
+		// console.log(firstTrain + 01:00);
+
+	var currentTime = moment(); 
+
 	var firstTimeConverted = moment(currentTime, "hh:mm").subtract(1, "years");
-		console.log ("Now -1 year: " + moment(firstTimeConverted).format("hh:mm"))
+		console.log ("firstTimeConverted " + firstTimeConverted.format("hh:mm A"));
 
 	//DIFFERENCE BETWEEN TIMES
-	var difference = moment().diff(moment(firstTimeConverted), "minutes");
-		console.log ("Difference: " + difference);
+	//var difference = moment().diff(moment(firstTrainConverted).format("hh:mm"));
+		//console.log ("Difference: " + difference);
 
 	//TIME AWAY
-	var timeApart = difference % frequency;
+
+	console.log(firstTimeConverted);
+	console.log(childSnapshot.val().frequency);
+	
+	var timeApart = firstTimeConverted % childSnapshot.val().fbFrequency;
+		console.log("FREQUENCY:" + childSnapshot.val().fbFrequency)
 		console.log ("Time Apart: " + timeApart);
 
 	//HOW MANY MINUTES UNTIL THE NEXT TRAIN
-	var minutesUntil = frequency - timeApart;
-		console.log ("Minutes until next train:") + minutesUntil;
+	var minutesUntil = -1*(timeApart - childSnapshot.val().fbFrequency);
+		console.log ("Minutes until next train:" + minutesUntil);
 
 	//WHAT TIME IS THE NEXT TRAIN:
-	var nextTrainFinal = moment().add(minutesUntil, "hh:mm").format("hh:mm");
+	var nextTrainFinal = (moment().add(minutesUntil, "minutes")).format("HH:mm");
 		console.log ("ARRIVAL: " + nextTrainFinal);
 
 
+	// ==============
+
+	console.log(childSnapshot.val());
 	// Appending the variables to HTML
 	$('.table').append("<tr>"+
 					   "<td>"+childSnapshot.val().fbOrigin+"</td>"+
 					   "<td>"+childSnapshot.val().fbDestination+"</td>"+
 					   "<td>"+childSnapshot.val().fbFirstTrain+"</td>"+
 					   "<td>"+childSnapshot.val().fbFrequency+"</td>"+
-					   "<td>"+ nextTrainFinal +"</td>"+
-					   "<td>"+ minutesUntil +"</td>"+
-					   "</tr>");
+					   "<td>"+nextTrainFinal+"</td>"+
+					   "<td>"+minutesUntil+"</td>"+
 
+
+					   "</tr>");
 
 	});
 
 //FUNCTION FOR FORM SUBMISSION
 $("#subButton").on("click", function() {
 
-
+	//LINK TO FIREBASE
 
 
 		
 
-
+//SETTING ALL THE VARIABLES TO USER INPUT
+	var origin = $("#originTrainInput").val();
+		console.log ("Origin: " + origin);
+	var destination = $("#finalDestInput").val();
+		console.log ("Destination: " + destination);
+	var firstTrain = moment($("#firstTrainInput").val().trim(), "HH:mm").format("HH:mm")
+		console.log ("First Train: " + firstTrain);
+	var frequency = moment($("#frequencyInput").val().trim(), "mm").format("mm");
+		console.log ("Frequency in minutes: " + frequency);
+	var currentTime = moment();
+		console.log ("Current Time: " + moment(currentTime).format("hh:mm"));
 
 				//RESET THE FORM WITH THE PLACEHOLDERS
 					$("#originTrainInput").val("originTrain".placeholder);
 					$("#finalDestInput").val("originTrain".placeholder);
 					$("#firstTrainInput").val("originTrain".placeholder);
 					$("#frequencyInput").val("originTrain".placeholder);
+
 
 	//Set Firebase Data:
 
@@ -95,7 +111,6 @@ $("#subButton").on("click", function() {
 				fbFirstTrain : firstTrain,
 				fbFrequency : frequency,
 			})
-
 
 
 
